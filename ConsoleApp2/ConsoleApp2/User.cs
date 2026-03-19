@@ -1,6 +1,6 @@
 ﻿namespace ConsoleApp2;
 
-public class User
+public abstract class User
 {
     public Guid IdUser { get; set; }
     public string Name { get; set; }
