@@ -32,4 +32,15 @@ public class Rental
         }
     }
     public bool IsOverdue => Delay > TimeSpan.Zero;
+    
+    public decimal Penalty { get; private set; }
+    
+    public void CalculatePenalty(decimal dailyRate) 
+    {
+        if (IsOverdue)
+        {
+            int delayedDays = (int)Math.Ceiling(Delay.TotalDays);
+            Penalty = delayedDays * dailyRate;
+        }
+    }
 }
