@@ -69,5 +69,14 @@ class Program
         Console.WriteLine($"- Rentee: {rentalToDelay.Rentee.Name} {rentalToDelay.Rentee.LastName}.");
         Console.WriteLine($"- Delay: {rentalToDelay.Delay.Days} days.");
         Console.WriteLine($"- Fee: {rentalToDelay.Penalty} PLN.");
+        
+        Console.WriteLine("\nscenario #5: System Report");
+        Console.WriteLine($"Total equipment in system: {service.Inventory.Count}");
+        Console.WriteLine($"Available items: {service.Inventory.Count(e => e.IsAvailable)}");
+        Console.WriteLine($"Active rentals: {service.Rentals.Count(r => r.ReturnDate == null)}");
+        foreach (var rental in service.Rentals.Where(r => r.ReturnDate == null))
+        {
+            Console.WriteLine($" - rented: {rental.RentObj.Name} by {rental.Rentee.Name} (Due: {rental.DueDate:yyyy-MM-dd})");
+        }
     }
 }
