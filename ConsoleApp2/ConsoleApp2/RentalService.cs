@@ -7,7 +7,7 @@ public class RentalService
     
     public void AddToInventory(Equipment item) => Inventory.Add(item);
 
-    public void Rent(User user, Equipment item, int days)
+    public Rental Rent(User user, Equipment item, int days)
     {
         if (!item.IsAvailable)
         {
@@ -22,7 +22,10 @@ public class RentalService
         }
 
         item.IsAvailable = false;
+        var rental = new Rental(user, item, days);
         Rentals.Add(new Rental(user, item, days));
+
+        return rental;
     }
     public void Return(Rental rental)
     {
