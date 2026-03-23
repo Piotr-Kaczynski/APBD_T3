@@ -4,6 +4,9 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("System wypożyczalni sprzętu");
+        var service = new RentalService();
+        var cam = new Camera("Zenit c445", 42, 3.5);
+        var laptop = new Laptop("Dell vostro", "Windows 11", 16);
+        var student = new Student(Guid.NewGuid(), "Tom", "Cruise");
     }
 }
