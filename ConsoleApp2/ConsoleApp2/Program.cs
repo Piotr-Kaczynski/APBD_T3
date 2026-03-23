@@ -47,5 +47,27 @@ class Program
         } catch (Exception e) {
             Console.WriteLine($"limit error: {e.Message}");
         }
+        Console.WriteLine("\nscenario #4: Correct return");
+        
+        var studentRental = service.Rentals.First(r => r.Rentee.IdUser == student.IdUser);
+        service.Return(studentRental);
+        Console.WriteLine($"Successfully returned {studentRental.RentObj.Name}. Penalty: {studentRental.Penalty} PLN.");
+        
+        Console.WriteLine("\nscenario #5: Overdue return");
+        var emp2 = new Employee(Guid.NewGuid(), "Mark", "Tester");
+        var vostro = new Laptop("Dell Vostro", "Windows 10", 8);
+        service.AddToInventory(vostro);
+
+        var rentalToDelay = service.Rent(emp2, vostro, 2); 
+        
+        rentalToDelay.RentDate = DateTime.Now.AddDays(-10); 
+        rentalToDelay.DueDate = rentalToDelay.RentDate.AddDays(2); 
+
+        service.Return(rentalToDelay);
+        
+        Console.WriteLine($"- Return: {rentalToDelay.RentObj.Name}.");
+        Console.WriteLine($"- Rentee: {rentalToDelay.Rentee.Name} {rentalToDelay.Rentee.LastName}.");
+        Console.WriteLine($"- Delay: {rentalToDelay.Delay.Days} days.");
+        Console.WriteLine($"- Fee: {rentalToDelay.Penalty} PLN.");
     }
 }
