@@ -18,7 +18,7 @@ public class RentalService
 
         if (activeAmount >= limit)
         {
-            throw new Exception($"User {user.Name} exceeded limit {limit} of possible rentals");
+            throw new Exception($"User {user.Name} {user.LastName} exceeded limit {limit} of possible rentals");
         }
 
         item.IsAvailable = false;
