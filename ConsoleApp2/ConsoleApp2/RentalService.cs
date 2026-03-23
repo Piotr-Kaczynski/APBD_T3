@@ -24,4 +24,12 @@ public class RentalService
         item.IsAvailable = false;
         Rentals.Add(new Rental(user, item, days));
     }
+    public void Return(Rental rental)
+    {
+        rental.ReturnDate = DateTime.Now;
+        rental.RentObj.IsAvailable = true;
+        rental.CalculatePenalty(10.0m);
+    }
+    public List<Rental> GetOverdueRentals() => Rentals.Where(r => r.IsOverdue).ToList();
+
 }
